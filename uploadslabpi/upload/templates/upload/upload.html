@@ -1,0 +1,17 @@
+{% extends 'upload/layouts/base_admin.html' %}
+{% load static %}
+
+{% block main-content %}
+
+<div class="container pt-4">
+        <h2 >Actualizar Dashboard BPI</h2>
+        <br>
+        <form  action='{% url "upload" %}' method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group md-12">
+                <input type="file" class="form-control-file border" name="file" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Cargar archivo</button>
+        </form>
+<div>
+{% endblock main-content %}

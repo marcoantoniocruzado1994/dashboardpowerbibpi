@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'upload/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'upload/css/sessiones.css'%}">
+    <title>Sesiones</title>
+</head>
+
+<body>
+    
+    
+    {% block navbar %}
+    {% include 'upload/layouts/navbar.html' %}
+    {% endblock navbar %}
+
+    {% block main-content %}
+
+    {% endblock main-content %}
+
+    {% block javascript %}
+
+    {% endblock javascript %}
+
+    {% block footer %}
+    {% include 'upload/layouts/footer.html' %}
+    {% endblock footer %}
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+{% extends 'upload/layouts/base_admin.html' %}
+{% load static %}
+
+
+
+{% block main-content %}
+
+<div class="container pt-4">
+    {% if code == 1 %}
+    <div class="alert alert-success">
+        <h3><b> {{ message }}</b></h3>
+    </div>
+    {% else %}
+    <div class="alert alert-danger">
+        <h3><b> {{ message }}</b></h3>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-4">
+            <input class="form-control mb-3" type="date" name="dia">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Sesiones del dia {{ fecha }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sesion in sesiones %}
+                    <tr>
+                        <td></td>
+                        <td>{{ sesion.0 }}</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Escoger sesiones</h3>
+                </div>
+                <div class="card-body">
+                    <button id="seleccionar" class="from-control btn btn-primary btn-block">
+                        Seleccionar sesiones aleatoriamente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Sesiones Aleatorias</th>
+                    </tr>
+                </thead>
+                <tbody id="sesiones_aleatorias">
+                    <tr>
+                        <th scope="row"></th>
+                        <td id="sesiones_aleatorias"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock main-content %}
+
+
+{% block javascript %}
+<script src="{% static 'upload/js/jquery.min.js' %}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("#seleccionar").on('click', function (e) {
+            $.ajax({
+                type: "GET",
+                url: "{% url 'sesiones_random' %}",
+                success: function (result) {
+                    let sesiones = '';
+
+                    for (let i = 0; i < result.sesiones.length; i++) {
+                        sesiones += `<tr>
+                            <th scope="row"> ${i + 1} </th>
+                            <td> ${result.sesiones[i]} </td>
+                        </tr>`
+                    }
+
+                    $("#sesiones_aleatorias").html(sesiones);
+
+
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+        });
+    });
+</script>
+{% endblock javascript %}

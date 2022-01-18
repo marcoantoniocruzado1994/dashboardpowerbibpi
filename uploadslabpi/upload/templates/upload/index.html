@@ -1,0 +1,22 @@
+{% extends 'upload/layouts/base_login.html' %}
+{% load static %}
+
+
+{% block main-content %}
+<div class="container right-panel-active">
+    <!--Formulario de Ingreso-->
+    <div class="container__form container--signin">
+        <form action='{% url "login_page" %}' method="post" class="form" id="form1">
+            {% csrf_token %}
+            <h2 class="form__title">Rpa Latam</h2>
+            <input id="usuario" name="username" type="text" placeholder="Usuario" class="input" />
+            <input id="contraseña" name="password" type="password" placeholder="contraseña" class="input" />
+            <button id="ingresar" class="btn">Ingresar</button>
+        </form>
+    </div>
+
+    <div class="container__overlay">
+        <div class="overlay"></div>
+    </div>
+</div>
+{% endblock main-content %}
